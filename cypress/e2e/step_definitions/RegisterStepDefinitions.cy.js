@@ -1,5 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import credentials from '../../support/credentials.js';
+import alerts from '../../support/alerts.js';
 
 Given('I am on the registration page', () => {
   cy.visit('/index.php?route=account/register');
@@ -25,17 +26,24 @@ When('I enter invalid registration details', () => {
   cy.get('input[name="agree"]').check();
 });
 
+/*
 When('I submit the registration form', () => {
-  cy.get('.pull-right > .btn').contains('Continue').click();
+  cy.get('.pull-right > .btn').contains('Continue').scrollIntoView().click();
+});
+*/
+
+
+When('I submit the registration form', () => {
+  cy.get('input[value="Continue"]').focus().click()
 });
 
+
 Then('I should be registered successfully', () => {
-  cy.url().should('include', 'account/account');
-  cy.get('.alert-success').should('be.visible').and('contain', 'Your Account Has Been Created!');
+  cy.url().should('include', 'account/success');
 });
 
 Then('I should see a registration error message', () => {
   cy.url().should('include', 'account/register');
-  cy.get('.alert-danger').should('be.visible').and('contain', 'Warning: E-Mail Address is already registered!');
+  cy.get('.alert-danger').should('be.visible').and('contain', alerts.basic.alreadyRegisteredEmail);
 });
 

@@ -25,6 +25,7 @@ const credentials = {
     firstName: 'Valid',
     lastName: 'User',
     telephone: '1234567890',
+    basicProduct: "Iphone",
     address: {
       address1: '123 Main St',
       city: 'New York',

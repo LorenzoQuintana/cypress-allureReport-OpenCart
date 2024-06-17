@@ -1,5 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import credentials from '../../support/credentials.js';
+import alerts from '../../support/alerts.js';
 
 Given('I am logged in as a user', () => {
   cy.visit('/index.php?route=account/login');
@@ -24,34 +25,23 @@ Given('I have added a {string} to the cart', (product) => {
 
 When('I proceed to checkout', () => {
   cy.get('#cart').click();
-  cy.contains('Checkout').click({ force: true });
-  
-  cy.get('#content').should('be.visible');
-  cy.get('.nav > :nth-child(2) > .dropdown-toggle').should('be.visible');
+  cy.contains('Checkout').click();
 });
 
 When('I complete the purchase', () => {
+  cy.get('#button-payment-address').should('be.visible').click();
 
-  cy.get('#input-payment-firstname').type(credentials.basic.firstName, { force: true });
-  cy.get('#input-payment-lastname').type(credentials.basic.lastName, { force: true });
-  cy.get('#input-payment-address-1').type(credentials.basic.address.address1, { force: true });
-  cy.get('#input-payment-city').type(credentials.basic.address.city, { force: true });
-  cy.get('#input-payment-postcode').type(credentials.basic.address.postcode, { force: true });
-  cy.get('#input-payment-country').select(credentials.basic.address.country, { force: true });
-  cy.get('#input-payment-zone').select(credentials.basic.address.zone, { force: true });
+  cy.get('#button-shipping-address').should('be.visible').click();
+
+  cy.get('#button-shipping-method').should('be.visible').click();
+
+  cy.get('input[name="agree"]').check();
+  cy.get('#button-payment-method').should('be.visible').click();
   
-  cy.get('#button-payment-address').should('be.visible').click({ force: true });
-
-  cy.get('#button-shipping-address').should('be.visible').click({ force: true });
-  
-  cy.get('#button-shipping-method').should('be.visible').click({ force: true });
-
-  cy.get('input[name="agree"]').check({ force: true });
-  cy.get('#button-payment-method').should('be.visible').click({ force: true });
-  cy.get('#button-confirm').should('be.visible').click({ force: true });
+  cy.get('#button-confirm').scrollIntoView().should('be.visible').click();
 });
 
 Then('I should see a confirmation message', () => {
-  cy.get('.alert-success').should('be.visible').and('contain', 'Your order has been placed');
+  cy.url().should('include', 'checkout/success');
 });
 

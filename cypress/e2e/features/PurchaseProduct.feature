@@ -1,7 +1,7 @@
-@smoke @regression
+@purchaseProduct
 Feature: Purchase Product
 
-  @smoke
+  @regression
   Scenario Outline: User buys a product
     Given I am logged in as a user
     And I have added a "<product>" to the cart
@@ -12,6 +12,7 @@ Feature: Purchase Product
     Examples:
       | product           |
       | iPhone            |
-      | MacBook           |
+      | Apple Cinema 30   |
+
 
 

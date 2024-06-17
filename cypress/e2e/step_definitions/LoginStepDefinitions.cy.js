@@ -1,5 +1,6 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import credentials from '../../support/credentials.js';
+import alerts from '../../support/alerts.js';
 
 Given('I am on the login page', () => {
   cy.visit('/index.php?route=account/login');
@@ -25,7 +26,7 @@ Then('I should be logged in successfully', () => {
 });
 
 Then('I should see an invalid login error message', () => {
-  cy.get('.alert').should('be.visible').and('contain', 'Warning: No match for E-Mail Address and/or Password.');
+  cy.get('.alert').should('be.visible').and('contain', alerts.basic.noEmailPassMatch);
 });
 
 

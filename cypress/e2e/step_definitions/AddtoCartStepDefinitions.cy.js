@@ -1,4 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import alerts from '../../support/alerts.js';
 
 Given('I am on the homepage', () => {
   cy.visit('/');
@@ -13,5 +14,5 @@ Then('the product should be added to the cart', () => {
 });
 
 Then('a confirmation message should be displayed', () => {
-  cy.get('.alert-success').contains('Success: You have added').should('be.visible');
+  cy.get('.alert-success').contains(alerts.basic.successAdded).should('be.visible');
 });
