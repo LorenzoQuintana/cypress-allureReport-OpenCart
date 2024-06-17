@@ -1,7 +1,7 @@
-@purchaseProduct
+@purchaseProduct @regression
 Feature: Purchase Product
 
-  @regression
+ 
   Scenario Outline: User buys a product
     Given I am logged in as a user
     And I have added a "<product>" to the cart

@@ -1,14 +1,14 @@
-@userRegistration
+@userRegistration @smoke @regression
 Feature: User Registration
 
-  @smoke @regression
+  @validCredentials
   Scenario: Successful registration with valid details
     Given I am on the registration page
     When I enter valid registration details
     And I submit the registration form
     Then I should be registered successfully
 
-   @smoke @regression
+   @invalidCredentials
   Scenario: Unsuccessful registration with invalid details
     Given I am on the registration page
     When I enter invalid registration details
