@@ -20,3 +20,9 @@ import './commands'
 // require('./commands')
 
 import '@shelex/cypress-allure-plugin';
+import '@badeball/cypress-cucumber-preprocessor/steps';
+
+// Ignorar excepciones no controladas de la aplicación
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });

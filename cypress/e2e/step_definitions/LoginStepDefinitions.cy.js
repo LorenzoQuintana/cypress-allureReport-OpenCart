@@ -1,0 +1,31 @@
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import credentials from '../../support/credentials.js';
+
+Given('I am on the login page', () => {
+  cy.visit('/index.php?route=account/login');
+});
+
+When('I enter valid login credentials', () => {
+  cy.get('#input-email').type(credentials.basic.email);
+  cy.get('#input-password').type(credentials.basic.password);
+});
+
+When('I enter invalid login credentials', () => {
+  cy.get('#input-email').type(credentials.invalid.email);
+  cy.get('#input-password').type(credentials.invalid.password);
+});
+
+When('I submit the login form', () => {
+  cy.get('form').contains('Login').click();
+});
+
+Then('I should be logged in successfully', () => {
+  cy.url().should('include', 'account/account');
+  cy.get('.alert').should('not.exist');
+});
+
+Then('I should see an invalid login error message', () => {
+  cy.get('.alert').should('be.visible').and('contain', 'Warning: No match for E-Mail Address and/or Password.');
+});
+
+

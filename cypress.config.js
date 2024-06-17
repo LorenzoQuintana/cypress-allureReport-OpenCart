@@ -18,7 +18,7 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: 'cypress/e2e/features/**/*.feature',
-    baseUrl: 'http://opencart.abstracta.us',
+    baseUrl: 'https://opencart.abstracta.us',
     supportFile: 'cypress/support/e2e.js',
     stepDefinitions: 'cypress/e2e/step_definitions/**/*.js',
   },
