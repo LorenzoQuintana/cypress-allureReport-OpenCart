@@ -7,6 +7,7 @@ const alerts = {
       alreadyRegisteredEmail: 'Warning: E-Mail Address is already registered!',
       modifyCartSuccess: 'Success: You have modified your shopping cart!',
       emptyCart: 'Your shopping cart is empty!',
+      tooManyLoginAttempts: 'Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.'
     }
 
   };

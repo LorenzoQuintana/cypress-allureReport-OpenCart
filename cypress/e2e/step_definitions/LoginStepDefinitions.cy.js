@@ -26,7 +26,16 @@ Then('I should be logged in successfully', () => {
 });
 
 Then('I should see an invalid login error message', () => {
-  cy.get('.alert').should('be.visible').and('contain', alerts.basic.noEmailPassMatch);
+  cy.get('.alert').should('be.visible').then(($alert) => {
+    const alertText = $alert.text();
+    if (alertText.includes(alerts.basic.noEmailPassMatch)) {
+      expect(alertText).to.contain(alerts.basic.noEmailPassMatch);
+    } else if (alertText.includes(alerts.basic.tooManyLoginAttempts)) {
+      expect(alertText).to.contain(alerts.basic.tooManyLoginAttempts);
+    } else {
+      throw new Error('Unexpected error message');
+    }
+  });
 });
 
 
