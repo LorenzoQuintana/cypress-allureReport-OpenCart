@@ -1,18 +1,19 @@
+
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import alerts from '../../support/alerts.js';
+import HomePage from '../../pageObjects/HomePage';
 
 Given('I am on the homepage', () => {
-  cy.visit('/');
+  HomePage.visit();
 });
 
 When('I add a product to the cart', () => {
-  cy.get('button[onclick*="cart.add"]').first().click();
+  HomePage.addFirstProductToCart();
 });
 
 Then('the product should be added to the cart', () => {
-  cy.get('.alert-success').should('be.visible');
+  HomePage.getSuccessAlert().should('be.visible');
 });
 
 Then('a confirmation message should be displayed', () => {
-  cy.get('.alert-success').contains(alerts.basic.successAdded).should('be.visible');
+  HomePage.getSuccessAlertMessage().should('be.visible');
 });
